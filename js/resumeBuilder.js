@@ -41,7 +41,7 @@ var projects = {
       "dates" : "2016",
       "description" : "Package design",
       "images" : [
-        "images/terminal-gravity-thumb.jpg"
+        "images/terminal-gravity-thumb.jpg",
       ]
     },
     {
@@ -59,7 +59,7 @@ var bio = {
   "name" : "Greg Davenport",
   "role" : "Graphic Designer",
   "welcomeMesssage" : "Let's make cool stuff together!",
-  "biopic" : "images/fry.jpg",
+  "biopic" : "images/headshot.jpg",
   "contacts" : {
     "mobile" : "360-869-6933",
     "email" : "gregdavenport13@gmail.com",
@@ -112,21 +112,107 @@ var education = {
 
 work.display = function(){
 
+  for(i=0; i < work.jobs.length; i++) {
+    // Add the container div for each job
+    $("#workExperience").append(HTMLworkStart);
+
+    // Add Employer and Title
+    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+    var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
+
+    // Concatentate Employer and Title
+    var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+    // Not sure why ":last" is required. But it doesn't work without it.
+    $(".work-entry:last").append(formattedEmployerTitle);
+
+    // Add dates
+    var formattedDates = HTMLworkDates.replace("%data%", work.jobs[i].dates);
+    $(".work-entry:last").append(formattedDates);
+
+    // Add description
+    var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
+    $(".work-entry:last").append(formattedDescription);
+
+  };
+
 };
+
+
+
 
 projects.display = function(){
 
+  for(i=0; i < projects.projects.length; i++){
+    $('#projects').append(HTMLprojectStart);
+
+    var formattedHTMLprojectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+    var formattedHTMLprojectDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
+    var formattedHTMLprojectDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
+
+    $('.project-entry:last').append(formattedHTMLprojectTitle, formattedHTMLprojectDates,  formattedHTMLprojectDescription);
+
+    // The images property is an array, so we use the forEach method
+    projects.projects[i].images.forEach(function(img) {
+      var image = HTMLprojectImage.replace("%data%", img);
+      $(".project-entry:last").append(image);
+    });
+
+  };
+
 };
+
+
+
 
 bio.display = function(){
 
-};
+  // Add name and role
+  var formattedHeaderName = HTMLheaderName.replace('%data%', bio.name);
+  var formattedHeaderRole = HTMLheaderRole.replace('%data%', bio.role);
+
+  $('#header').prepend(formattedHeaderName, formattedHeaderRole);
+
+  // Add contact info.
+  // I put the formatted contact items into an array so we can append them all at once in the loop below.
+  var contactArray = [
+    formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile),
+    formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email),
+    formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter),
+    formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github),
+    formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location)
+  ]
+
+  for (i=0; i < contactArray.length; i++) {
+    $('#topContacts').append(contactArray[i]);
+  }
+
+  // Add picture and welcome messsage.
+  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+  var formattedHTMLwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMesssage);
+
+  $('#header').append(formattedBioPic, formattedHTMLwelcomeMsg);
+
+  // Add skillz.
+  $('#header').append(HTMLskillsStart); // Just grabbing a piece of required HTML from the helper file.
+
+  // Loop through skills and append them to the #skills list.
+  for (i=0; i < bio.skills.length; i++) {
+    formattedHTMLSkills = HTMLskills.replace('%data%', bio.skills[i]);
+    $('#skills').append(formattedHTMLSkills);
+  }
+
+}; // End of the bio.display function.
 
 education.display = function(){
 
 };
 
+// Run the functions
 
+bio.display();
+work.display();
+projects.display();
 
 
 
