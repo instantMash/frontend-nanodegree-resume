@@ -64,7 +64,7 @@ var bio = {
     "mobile" : "360-869-6933",
     "email" : "gregdavenport13@gmail.com",
     "github" : "instantMash",
-    "twitter" : " ",
+    "twitter" : "instantMash",
     "location" : "Ridgefield, WA"
   },
   "skills" : [
@@ -173,7 +173,7 @@ bio.display = function(){
   $('#header').prepend(formattedHeaderName, formattedHeaderRole);
 
   // Add contact info.
-  // I put the formatted contact items into an array so we can append them all at once in the loop below.
+  // Put the formatted contact items into an array so we can append them all at once in the loop below.
   var contactArray = [
     formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile),
     formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email),
@@ -183,7 +183,7 @@ bio.display = function(){
   ]
 
   for (i=0; i < contactArray.length; i++) {
-    $('#topContacts').append(contactArray[i]);
+    $('#topContacts, #footerContacts').append(contactArray[i]); // Add contacts to header AND footer
   }
 
   // Add picture and welcome messsage.
@@ -248,11 +248,9 @@ education.display = function(){
 
     };
 
-
-
-
-
 }; // End of education.display function
+
+
 
 // Run the functions
 
