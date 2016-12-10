@@ -7,21 +7,24 @@ var work = {
       "title" : "Senior Graphic Designer",
       "location" : "Ridgefield, WA",
       "dates" : "2013 - present",
-      "description" : "Creative lead on internal design team."
+      "description" : "Creative lead on internal design team.",
+      "url" : "http://www.corwinbevco.com/"
     },
     {
       "employer" : "Formations Design Group",
       "title" : "Graphic Designer",
       "location" : "Vancouver, WA",
       "dates" : "2007 - 2012",
-      "description" : "Graphic design and web development in small, versatile design agency."
+      "description" : "Graphic design and web development in small, versatile design agency.",
+      "url" : "http://www.formationsdesign.com/"
     },
     {
       "employer" : "Premier Graphics",
       "title" : "Prepress Technician",
       "location" : "Bellingham, WA",
       "dates" : "2001 - 2007",
-      "description" : "Prepare design files for accurate print output. Preflight, proofing, and last-minute edits."
+      "description" : "Prepare design files for accurate print output. Preflight, proofing, and last-minute edits.",
+      "url" : "http://www.premiergraphics.biz/"
     }
   ]
 };
@@ -34,15 +37,18 @@ var projects = {
       "description" : "Package design & branding",
       "images" : [
         "images/backwoods-thumbnail.jpg"
-      ]
+      ],
+      "url" : "http://www.gregdavenportdesign.com/#/backwoods/"
     },
     {
       "title" : "Terminal Gravity",
       "dates" : "2016",
       "description" : "Package design",
       "images" : [
-        "images/terminal-gravity-thumb.jpg",
-      ]
+        "images/terminal-gravity-thumb.jpg"
+      ],
+      "url" : "http://www.gregdavenportdesign.com/#/terminal-gravity-brewing/"
+
     },
     {
       "title" : "Kendall's Pioneer Distributing",
@@ -50,7 +56,8 @@ var projects = {
       "description" : "Branding & logo design",
       "images" : [
         "images/kendalls-thumb.jpg"
-      ]
+      ],
+      "url" : "http://www.gregdavenportdesign.com/#/kendalls/"
     }
   ]
 };
@@ -82,7 +89,7 @@ var education = {
       "location" : "Wenham, MA",
       "degree" : "BA",
       "dates" : "1995 - 2000",
-      "url" : "https://www.aclu.org/",
+      "url" : "http://i.giphy.com/cxv9YdPDsAMKs.gif",
       "majors" : [
         "Fine Art/Painting"
       ]
@@ -117,7 +124,7 @@ work.display = function(){
     $("#workExperience").append(HTMLworkStart);
 
     // Add Employer and Title
-    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer);
+    var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[i].employer).replace('#', work.jobs[i].url);
     var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[i].title);
 
     // Concatentate Employer and Title
@@ -134,19 +141,17 @@ work.display = function(){
     var formattedDescription = HTMLworkDescription.replace("%data%", work.jobs[i].description);
     $(".work-entry:last").append(formattedDescription);
 
-  };
+  }
 
-};
-
-
-
+}; // End of work.display function
 
 projects.display = function(){
 
   for(i=0; i < projects.projects.length; i++){
     $('#projects').append(HTMLprojectStart);
 
-    var formattedHTMLprojectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title);
+    var formattedHTMLprojectTitle = HTMLprojectTitle.replace('%data%', projects.projects[i].title).replace('#', projects.projects[i].url);
+
     var formattedHTMLprojectDates = HTMLprojectDates.replace('%data%', projects.projects[i].dates);
     var formattedHTMLprojectDescription = HTMLprojectDescription.replace('%data%', projects.projects[i].description);
 
@@ -157,12 +162,8 @@ projects.display = function(){
       var formattedHTMLprojectImage = HTMLprojectImage.replace("%data%", e);
       $(".project-entry:last").append(formattedHTMLprojectImage);
     });
-  };
-
-};
-
-
-
+  }
+}; // End of projects.display function
 
 bio.display = function(){
 
@@ -180,7 +181,7 @@ bio.display = function(){
     formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter),
     formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github),
     formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location)
-  ]
+  ];
 
   for (i=0; i < contactArray.length; i++) {
     $('#topContacts, #footerContacts').append(contactArray[i]); // Add contacts to header AND footer
@@ -207,8 +208,7 @@ education.display = function(){
   for (i=0; i < education.schools.length; i++){
     $('#education').append(HTMLschoolStart);
 
-    var formattedHTMLschoolName = HTMLschoolName.replace('%data%', education.schools[i].name);
-    var formattedHTMLschoolName = formattedHTMLschoolName.replace('#', education.schools[i].url);
+    var formattedHTMLschoolName = HTMLschoolName.replace('%data%', education.schools[i].name).replace('#', education.schools[i].url);
     var formattedHTMLschoolDegree = HTMLschoolDegree.replace('%data%', education.schools[i].degree);
     var schoolNameAndDegree = formattedHTMLschoolName + formattedHTMLschoolDegree;
     var formattedHTMLschoolDates = HTMLschoolDates.replace('%data%', education.schools[i].dates);
@@ -220,8 +220,7 @@ education.display = function(){
       var formattedHTMLschoolMajor = HTMLschoolMajor.replace('%data%', e);
       $('.education-entry:last').append(formattedHTMLschoolMajor);
     });
-
-  };
+  }
 
 // Online classes
     $('#education').append(HTMLonlineClasses);
@@ -239,58 +238,17 @@ education.display = function(){
 
       var formattedHTMLonlineDates = HTMLonlineDates.replace('%data%', education.onlineCourses[i].dates);
 
-      var formattedHTMLonlineURL = HTMLonlineURL.replace('%data%', education.onlineCourses[i].url);
-
-      var formattedHTMLonlineURL = formattedHTMLonlineURL.replace('#', 'https://' + education.onlineCourses[i].url);
+      var formattedHTMLonlineURL = HTMLonlineURL.replace('%data%', education.onlineCourses[i].url).replace('#', 'https://' + education.onlineCourses[i].url);
 
       $('.education-entry:last').append(edTitleAndSchool, formattedHTMLonlineDates, formattedHTMLonlineURL);
-
-
-    };
-
+    }
 }; // End of education.display function
 
-
-
-// Run the functions
-
+// Run the  display functions
 bio.display();
 work.display();
 projects.display();
 education.display();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
+// Add Google map
+$('#mapDiv').append(googleMap);
