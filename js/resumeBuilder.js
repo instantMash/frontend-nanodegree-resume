@@ -6,7 +6,7 @@ var work = {
       "employer" : "Corwin Beverage",
       "title" : "Senior Graphic Designer",
       "location" : "Ridgefield, WA",
-      "dates" : "2013 - present",
+      "dates" : "2013 – present",
       "description" : "Creative lead on internal design team.",
       "url" : "http://www.corwinbevco.com/"
     },
@@ -170,37 +170,34 @@ bio.display = function(){
   // Add name and role
   var formattedHeaderName = HTMLheaderName.replace('%data%', bio.name);
   var formattedHeaderRole = HTMLheaderRole.replace('%data%', bio.role);
+  var formattedHTMLwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMesssage); // I changed the order of the welcome message to match my new design.
 
-  $('#header').prepend(formattedHeaderName, formattedHeaderRole);
+  $('#header').prepend(formattedHeaderName, formattedHeaderRole, formattedHTMLwelcomeMsg);
 
-  // Add contact info.
-  // Put the formatted contact items into an array so we can append them all at once in the loop below.
-  var contactArray = [
-    formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile),
-    formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email),
-    formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter),
-    formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github),
-    formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location)
-  ];
-
-  for (i=0; i < contactArray.length; i++) {
-    $('#topContacts, #footerContacts').append(contactArray[i]); // Add contacts to header AND footer
-  }
-
-  // Add picture and welcome messsage.
-  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-  var formattedHTMLwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMesssage);
-
-  $('#header').append(formattedBioPic, formattedHTMLwelcomeMsg);
 
   // Add skillz.
-  $('#header').append(HTMLskillsStart); // Just grabbing a piece of required HTML from the helper file.
+  $(HTMLskillsStart).insertBefore('#topContacts'); // Just grabbing a piece of required HTML from the helper file.
 
   // Loop through skills and append them to the #skills list.
   for (i=0; i < bio.skills.length; i++) {
     formattedHTMLSkills = HTMLskills.replace('%data%', bio.skills[i]);
     $('#skills').append(formattedHTMLSkills);
   }
+
+  // Add contacts
+    formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile),
+    formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email),
+    formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter),
+    formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github),
+    formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location)
+
+    $('#topContacts, #footerContacts').append(formattedHTMLmobile, formattedHTMLemail, formattedHTMLtwitter, formattedHTMLgithub, formattedHTMLlocation); // Add contacts to header AND footer
+
+
+
+  // Add picture
+  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+  $('#header').append(formattedBioPic);
 
 }; // End of the bio.display function.
 
