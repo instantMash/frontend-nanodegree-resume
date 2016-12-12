@@ -65,7 +65,7 @@ var projects = {
 var bio = {
   "name" : "Greg Davenport",
   "role" : "Graphic Designer",
-  "welcomeMesssage" : "Let's make cool stuff together!",
+  "welcomeMessage" : "Let's make cool stuff together!",
   "biopic" : "images/headshot.jpg",
   "contacts" : {
     "mobile" : "360-869-6933",
@@ -170,7 +170,7 @@ bio.display = function(){
   // Add name and role
   var formattedHeaderName = HTMLheaderName.replace('%data%', bio.name);
   var formattedHeaderRole = HTMLheaderRole.replace('%data%', bio.role);
-  var formattedHTMLwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMesssage); // I changed the order of the welcome message to match my new design.
+  var formattedHTMLwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage); // I changed the order of the welcome message to match my new design.
 
   $('#header').prepend(formattedHeaderName, formattedHeaderRole, formattedHTMLwelcomeMsg);
 
