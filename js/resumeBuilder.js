@@ -185,11 +185,11 @@ bio.display = function(){
   }
 
   // Add contacts
-    formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile),
-    formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email),
-    formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter),
-    formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github),
-    formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location)
+    formattedHTMLmobile = HTMLmobile.replace('%data%', bio.contacts.mobile);
+    formattedHTMLemail = HTMLemail.replace('%data%', bio.contacts.email);
+    formattedHTMLtwitter = HTMLtwitter.replace('%data%', bio.contacts.twitter);
+    formattedHTMLgithub = HTMLgithub.replace('%data%', bio.contacts.github);
+    formattedHTMLlocation = HTMLlocation.replace('%data%', bio.contacts.location);
 
     $('#topContacts, #footerContacts').append(formattedHTMLmobile, formattedHTMLemail, formattedHTMLtwitter, formattedHTMLgithub, formattedHTMLlocation); // Add contacts to header AND footer
 
